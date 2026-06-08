@@ -24,14 +24,14 @@ export default function SectionHeading({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px", amount: 0.35 }}
       transition={{ duration: 0.55, ease: EASE_OUT }}
-      className={`mb-12 lg:mb-16 ${alignClass} ${className}`}
+      className={`mb-8 sm:mb-12 lg:mb-16 ${alignClass} ${className}`}
     >
       <motion.h2
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-60px" }}
         transition={{ duration: 0.5, ease: EASE_OUT }}
-        className="font-[family-name:var(--font-sora)] text-3xl font-bold tracking-tight text-text-primary sm:text-4xl lg:text-5xl"
+        className="font-[family-name:var(--font-sora)] text-[1.65rem] font-bold tracking-tight text-text-primary sm:text-4xl lg:text-5xl"
       >
         {title}
       </motion.h2>

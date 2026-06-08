@@ -57,6 +57,21 @@
 
   --background: var(--dirty-white);
   --foreground: var(--text-primary);
+
+  /* Responsive spacing scale */
+  --section-py: clamp(3.5rem, 8vw, 7rem);
+  --section-gap: clamp(2rem, 5vw, 4.5rem);
+  --container-px: clamp(1rem, 4vw, 5rem);
+
+  /* Fluid typography */
+  --text-body: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
+  --text-lead: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-heading-sm: clamp(1.35rem, 1.1rem + 1vw, 2rem);
+  --text-heading-md: clamp(1.65rem, 1.3rem + 1.5vw, 3rem);
+  --text-heading-lg: clamp(2rem, 1.5rem + 2.5vw, 3.75rem);
+
+  /* Touch target minimum (WCAG) */
+  --touch-min: 2.75rem;
 }
 
 @theme inline {
@@ -85,6 +100,8 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -93,6 +110,18 @@ body {
   color: var(--foreground);
   font-family: var(--font-manrope), system-ui, sans-serif;
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body.menu-open {
+  overflow: hidden;
+  touch-action: none;
+}
+
+@media (max-width: 767px) {
+  body {
+    background-attachment: scroll;
+  }
 }
 
 ::selection {
@@ -114,6 +143,25 @@ body {
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .glass-card:hover {
+    border-color: var(--lilac);
+    box-shadow: var(--shadow-hover);
+  }
+}
+
+.touch-target {
+  min-height: var(--touch-min);
+  min-width: var(--touch-min);
+}
+
+img,
+video,
+svg {
+  max-width: 100%;
+  height: auto;
 }
 
 .section-divider {

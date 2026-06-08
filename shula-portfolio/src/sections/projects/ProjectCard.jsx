@@ -21,7 +21,7 @@ export default function ProjectCard({ project, isCenter = false }) {
           width={800}
           height={520}
           className={styles.image}
-          sizes={isCenter ? "380px" : "300px"}
+          sizes="(max-width: 767px) 100vw, (max-width: 1023px) 360px, 380px"
         />
         <div className={styles.imageOverlay} aria-hidden />
         {project.rating && (

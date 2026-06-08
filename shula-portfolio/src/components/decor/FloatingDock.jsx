@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
-import { HiOutlineMail, HiOutlineChatAlt2 } from "react-icons/hi";
+import { HiOutlineMail, HiOutlineChatAlt2, HiOutlineX, HiOutlineArrowUp } from "react-icons/hi";
 import { site } from "@/data/site";
 import { EASE_OUT } from "@/lib/motion";
+import styles from "./floatingDock.module.css";
 
 const dockItems = [
   {
@@ -30,6 +31,203 @@ const dockItems = [
     external: true,
   },
 ];
+
+/** Bottom → top: LinkedIn (nearest trigger), GitHub, Email */
+const mobileFabItems = [
+  {
+    id: "linkedin",
+    href: site.socials.linkedin.href,
+    label: "LinkedIn",
+    icon: FaLinkedin,
+    external: true,
+  },
+  {
+    id: "github",
+    href: site.socials.github.href,
+    label: "GitHub",
+    icon: FaGithub,
+    external: true,
+  },
+  {
+    id: "email",
+    href: site.socials.email.href,
+    label: "Email",
+    icon: HiOutlineMail,
+    external: true,
+  },
+];
+
+const fabSpring = { type: "spring", stiffness: 440, damping: 30, mass: 0.6 };
+
+const actionVariants = {
+  hidden: { opacity: 0, scale: 0.55, y: 28 },
+  visible: (index) => ({
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { ...fabSpring, delay: index * 0.08 },
+  }),
+  exit: (index) => ({
+    opacity: 0,
+    scale: 0.55,
+    y: 20,
+    transition: {
+      ...fabSpring,
+      delay: (mobileFabItems.length - 1 - index) * 0.05,
+    },
+  }),
+};
+
+function MobileFab() {
+  const [open, setOpen] = useState(false);
+  const [showTop, setShowTop] = useState(false);
+
+  const close = useCallback(() => setOpen(false), []);
+  const toggle = useCallback(() => setOpen((prev) => !prev), []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowTop((window.scrollY || window.pageYOffset) > 160);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!open) return undefined;
+
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") close();
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open, close]);
+
+  return (
+    <>
+      <AnimatePresence>
+        {open && (
+          <motion.button
+            type="button"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
+            onClick={close}
+            className={styles.backdrop}
+            aria-label="Close social menu"
+          />
+        )}
+      </AnimatePresence>
+
+      <motion.div
+        layout
+        className={styles.mobileFab}
+        role="group"
+        aria-label="Mobile quick actions"
+      >
+        <AnimatePresence>
+          {showTop && (
+            <motion.button
+              type="button"
+              layout
+              initial={{ opacity: 0, scale: 0.85, y: 8 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.85, y: 8 }}
+              transition={fabSpring}
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              aria-label="Back to top"
+              whileTap={{ scale: 0.92 }}
+              className={styles.scrollTopBtn}
+            >
+              <HiOutlineArrowUp size={18} aria-hidden />
+            </motion.button>
+          )}
+        </AnimatePresence>
+
+        <motion.div layout className={styles.actionStack}>
+          <AnimatePresence>
+            {open &&
+              mobileFabItems.map((item, index) => {
+                const Icon = item.icon;
+
+                return (
+                  <motion.a
+                    key={item.id}
+                    href={item.href}
+                    target={item.external ? "_blank" : undefined}
+                    rel={item.external ? "noopener noreferrer" : undefined}
+                    aria-label={item.label}
+                    title={item.label}
+                    onClick={close}
+                    custom={index}
+                    variants={actionVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    whileTap={{ scale: 0.88 }}
+                    whileHover={{ scale: 1.08, y: -3 }}
+                    className={styles.actionBtn}
+                  >
+                    <Icon size={18} aria-hidden />
+                  </motion.a>
+                );
+              })}
+          </AnimatePresence>
+        </motion.div>
+
+        <motion.button
+          type="button"
+          layout
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 1, duration: 0.45, ease: EASE_OUT }}
+          onClick={toggle}
+          aria-label={open ? "Close social menu" : "Open social menu"}
+          aria-expanded={open}
+          aria-haspopup="true"
+          whileTap={{ scale: 0.92 }}
+          className={`${styles.triggerBtn} ${open ? styles.triggerBtnOpen : ""}`}
+        >
+          <motion.span
+            animate={{ rotate: open ? 90 : 0 }}
+            transition={fabSpring}
+            className={styles.iconWrap}
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {open ? (
+                <motion.span
+                  key="close"
+                  initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                  exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                  transition={fabSpring}
+                  className={styles.iconWrap}
+                >
+                  <HiOutlineX size={22} aria-hidden />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="open"
+                  initial={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                  exit={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                  transition={fabSpring}
+                  className={styles.iconWrap}
+                >
+                  <HiOutlineChatAlt2 size={20} aria-hidden />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </motion.span>
+        </motion.button>
+      </motion.div>
+    </>
+  );
+}
 
 export default function FloatingDock() {
   const [hovered, setHovered] = useState(null);
@@ -94,19 +292,7 @@ export default function FloatingDock() {
         </div>
       </motion.aside>
 
-      <motion.button
-        type="button"
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 1, duration: 0.45, ease: EASE_OUT }}
-        onClick={scrollToContact}
-        aria-label="Contact me"
-        whileHover={{ scale: 1.06, y: -2 }}
-        whileTap={{ scale: 0.95 }}
-        className="fixed bottom-24 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-lilac/50 bg-white/85 text-navy shadow-[var(--shadow-elevated)] backdrop-blur-xl lg:hidden"
-      >
-        <HiOutlineMail size={20} aria-hidden />
-      </motion.button>
+      <MobileFab />
     </>
   );
 }

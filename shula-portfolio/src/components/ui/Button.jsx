@@ -32,7 +32,7 @@ export default function Button({
   ...props
 }) {
   const base =
-    "relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lilac";
+    "relative inline-flex min-h-11 w-full items-center justify-center gap-2 overflow-hidden rounded-full px-5 py-3 text-sm font-semibold tracking-wide transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lilac sm:w-auto sm:min-h-0 sm:px-7 sm:py-3.5";
 
   const classes = `${base} ${variants[variant] || variants.primary} ${className}`;
 

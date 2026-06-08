@@ -12,7 +12,7 @@ export default function ScrollIndicator({ href = "#about" }) {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 1.1, duration: 0.55 }}
-      className="group absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-navy-muted"
+      className="group absolute bottom-4 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-navy-muted sm:bottom-8 sm:flex"
       aria-label="Scroll to explore"
     >
       <div className="flex h-11 w-7 items-start justify-center rounded-full border-2 border-lilac/70 bg-white/50 p-1.5 backdrop-blur-sm transition-colors group-hover:border-navy/30">

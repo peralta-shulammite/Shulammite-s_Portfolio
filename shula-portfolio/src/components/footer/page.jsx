@@ -31,7 +31,7 @@ export default function Footer() {
 
       <Container>
         <div className="flex min-h-[40px] items-center justify-center">
-          <p className="text-xs font-medium text-lilac-soft/85 sm:text-sm">
+          <p className="px-2 text-center text-xs font-medium leading-relaxed text-lilac-soft/85 sm:text-sm">
             © {year} {site.shortName}. {site.footer.copyright}
           </p>
         </div>
@@ -49,7 +49,7 @@ export default function Footer() {
         whileHover={showTop ? { scale: 1.08, y: -2 } : undefined}
         whileTap={{ scale: 0.95 }}
         transition={{ duration: 0.3 }}
-        className={`fixed bottom-6 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-lilac/95 text-navy shadow-[0_14px_26px_rgba(13,27,61,0.22)] hover:bg-lilac ${
+        className={`fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] z-50 hidden h-11 w-11 items-center justify-center rounded-full border border-lilac/50 bg-lilac/95 text-navy shadow-[0_14px_26px_rgba(13,27,61,0.22)] backdrop-blur-sm hover:bg-lilac lg:flex ${
           showTop ? "pointer-events-auto" : "pointer-events-none"
         }`}
       >

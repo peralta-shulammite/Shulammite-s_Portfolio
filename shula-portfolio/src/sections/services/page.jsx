@@ -16,7 +16,7 @@ export default function Services() {
   const { services } = site;
 
   return (
-    <section id="services" className="relative bg-dirty-white py-20 lg:py-28">
+    <section id="services" className="relative bg-dirty-white py-14 sm:py-20 lg:py-28">
       <Container>
         <SectionHeading title={services.title} />
 
@@ -33,7 +33,7 @@ export default function Services() {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 className="group flex flex-col text-center md:text-left"
               >
-                <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-lilac-soft to-lilac transition-transform duration-300 group-hover:scale-110 md:mx-0">
+                <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-lilac-soft to-lilac transition-transform duration-300 sm:h-16 sm:w-16 [@media(hover:hover)]:group-hover:scale-110 md:mx-0">
                   <Icon
                     size={32}
                     strokeWidth={1.5}

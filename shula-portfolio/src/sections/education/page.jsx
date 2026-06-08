@@ -14,7 +14,7 @@ function ExperienceTimelineItem({ item, index, isLast }) {
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: index * 0.1 }}
-      className="relative flex gap-5"
+      className="relative flex gap-3 sm:gap-5"
     >
       <div className="flex flex-col items-center">
         <span
@@ -34,7 +34,7 @@ function ExperienceTimelineItem({ item, index, isLast }) {
 
       <motion.div
         whileHover={hoverLift}
-        className={`glass-card flex-1 rounded-2xl p-5 lg:p-6 transition-[box-shadow,border-color] hover:border-lilac ${isLast ? "" : "mb-5"}`}
+        className={`glass-card flex-1 rounded-2xl p-4 sm:p-5 lg:p-6 transition-[box-shadow,border-color] hover:border-lilac ${isLast ? "" : "mb-4 sm:mb-5"}`}
       >
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-xs font-semibold uppercase tracking-wider text-text-light">
@@ -62,11 +62,11 @@ export default function Education() {
   );
 
   return (
-    <section id="education" className="relative bg-lilac-soft/30 py-20 lg:py-28">
+    <section id="education" className="relative bg-lilac-soft/30 py-14 sm:py-20 lg:py-28">
       <Container>
         <SectionHeading title={education.title} />
 
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-16">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -84,7 +84,7 @@ export default function Education() {
               viewport={viewportOnce}
               transition={{ duration: 0.5 }}
               whileHover={hoverLift}
-              className="glass-card rounded-2xl p-6 lg:p-8 transition-[box-shadow,border-color] hover:border-lilac"
+              className="glass-card rounded-2xl p-5 sm:p-6 lg:p-8 transition-[box-shadow,border-color] hover:border-lilac"
             >
               <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-lilac-soft to-lilac">
                 <GraduationCap size={22} className="text-navy" strokeWidth={1.5} aria-hidden />

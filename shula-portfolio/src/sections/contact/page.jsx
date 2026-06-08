@@ -20,14 +20,14 @@ export default function Contact() {
   const { contact } = site;
 
   return (
-    <section id="contact" className="relative py-20 lg:py-28">
+    <section id="contact" className="relative py-14 sm:py-20 lg:py-28">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.55, ease: EASE_OUT }}
-          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-dirty-white via-lilac-soft to-lilac/40 px-8 py-14 text-center shadow-[var(--shadow-elevated)] lg:px-16 lg:py-16"
+          className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-dirty-white via-lilac-soft to-lilac/40 px-5 py-10 text-center shadow-[var(--shadow-elevated)] sm:rounded-3xl sm:px-8 sm:py-14 lg:px-16 lg:py-16"
         >
           <motion.div
             className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-lilac/40 blur-3xl"
@@ -66,7 +66,8 @@ export default function Contact() {
               variants={item}
               href={`mailto:${contact.email}`}
               whileHover={{ scale: 1.02, y: -1 }}
-              className="relative mt-6 inline-flex items-center gap-2 text-sm font-medium text-navy transition-colors hover:text-navy-muted sm:text-base"
+              whileTap={{ scale: 0.98 }}
+              className="relative mt-6 inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-full px-4 py-2.5 break-all text-sm font-medium text-navy transition-colors hover:bg-white/50 hover:text-navy-muted sm:break-normal sm:text-base"
             >
               <HiOutlineMail size={18} aria-hidden />
               {contact.email}
@@ -74,7 +75,7 @@ export default function Contact() {
 
             <motion.div
               variants={item}
-              className="relative mt-8 flex flex-wrap items-center justify-center gap-4"
+              className="relative mt-8 flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-4"
             >
               <Button href={contact.hireHref}>{contact.hireCta}</Button>
               <Button href={contact.workHref} variant="secondary">

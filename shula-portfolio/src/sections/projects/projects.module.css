@@ -1,8 +1,14 @@
 .section {
   position: relative;
   background: var(--dirty-white);
-  padding: 5rem 0 6rem;
+  padding: 3.5rem 0 4.5rem;
   overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .section {
+    padding: 5rem 0 6rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -17,14 +23,20 @@
   align-items: center;
   justify-content: center;
   gap: 0;
-  min-height: 520px;
-  padding: 0 3.5rem;
+  min-height: auto;
+  padding: 0 2.75rem;
 }
 
-@media (max-width: 767px) {
+@media (min-width: 640px) {
   .carouselWrap {
-    min-height: 480px;
-    padding: 0 2.75rem;
+    padding: 0 3rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .carouselWrap {
+    min-height: 520px;
+    padding: 0 3.5rem;
   }
 }
 
@@ -41,6 +53,7 @@
 @media (max-width: 767px) {
   .track {
     gap: 0;
+    max-width: 100%;
   }
 }
 
@@ -93,7 +106,8 @@
   }
 
   .cardSlotCenter {
-    width: min(100%, 320px);
+    width: 100%;
+    max-width: 100%;
   }
 }
 
@@ -102,12 +116,13 @@
   top: 50%;
   z-index: 10;
   display: flex;
-  height: 2.75rem;
-  width: 2.75rem;
+  height: 2.5rem;
+  width: 2.5rem;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  border: 1px solid rgba(13, 27, 61, 0.12);
+  border: 1px solid rgba(13, 27, 61, 0.1);
   background: var(--white);
   color: var(--navy);
   box-shadow: var(--shadow-card);
@@ -125,17 +140,41 @@
   transform: translateY(-50%) scale(1.05);
 }
 
+.navBtn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
 .navBtnLeft {
-  left: 0.5rem;
+  left: 0;
 }
 
 .navBtnRight {
-  right: 0.5rem;
+  right: 0;
+}
+
+@media (max-width: 767px) {
+  .navBtnLeft {
+    background: var(--lilac-soft);
+    border-color: rgba(214, 198, 230, 0.8);
+  }
+
+  .navBtnRight {
+    background: var(--white);
+    border-color: rgba(13, 27, 61, 0.1);
+  }
+}
+
+@media (min-width: 640px) {
+  .navBtn {
+    height: 2.75rem;
+    width: 2.75rem;
+  }
 }
 
 @media (min-width: 768px) {
   .navBtnLeft {
     left: 1rem;
+    background: var(--white);
   }
 
   .navBtnRight {
@@ -155,6 +194,13 @@
   transition: box-shadow 0.35s ease;
 }
 
+@media (max-width: 767px) {
+  .card {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-elevated);
+  }
+}
+
 .imageWrap {
   position: relative;
   aspect-ratio: 16 / 10;
@@ -166,10 +212,6 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
-}
-
-.card:hover .image {
-  transform: scale(1.06);
 }
 
 .imageOverlay {
@@ -184,10 +226,6 @@
   opacity: 0;
   transition: opacity 0.4s ease;
   pointer-events: none;
-}
-
-.card:hover .imageOverlay {
-  opacity: 1;
 }
 
 .ratingBadge {
@@ -214,6 +252,12 @@
 .body {
   padding: 1.1rem 1.25rem 1.25rem;
   background: var(--white);
+}
+
+@media (max-width: 767px) {
+  .body {
+    padding: 1rem 1.15rem 1.15rem;
+  }
 }
 
 .metaRow {
@@ -246,6 +290,12 @@
 
 .cardSlotCenter .cardTitle {
   font-size: 1.5rem;
+}
+
+@media (max-width: 767px) {
+  .cardSlotCenter .cardTitle {
+    font-size: 1.4rem;
+  }
 }
 
 .cardSubtitle {
@@ -281,7 +331,8 @@
   gap: 0.5rem;
   width: 100%;
   margin-top: 1rem;
-  padding: 0.7rem 1rem;
+  min-height: var(--touch-min);
+  padding: 0.75rem 1rem;
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -297,7 +348,23 @@
     color 0.25s ease;
 }
 
-.viewBtn:hover {
+@media (hover: hover) and (pointer: fine) {
+  .viewBtn:hover {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: var(--white);
+  }
+
+  .card:hover .image {
+    transform: scale(1.06);
+  }
+
+  .card:hover .imageOverlay {
+    opacity: 1;
+  }
+}
+
+.viewBtn:active {
   background: var(--navy);
   border-color: var(--navy);
   color: var(--white);
@@ -306,29 +373,48 @@
 .dots {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 0.5rem;
-  margin-top: 2rem;
+  margin-top: 1.75rem;
+}
+
+@media (min-width: 768px) {
+  .dots {
+    margin-top: 2rem;
+  }
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
   border: none;
-  background: var(--lilac);
-  opacity: 0.4;
+  background: transparent;
   cursor: pointer;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.dotActive {
-  opacity: 1;
-  transform: scale(1.2);
-  background: var(--navy);
+@media (min-width: 768px) {
+  .dot {
+    width: var(--touch-min);
+    height: var(--touch-min);
+  }
 }
 
-.ctaWrap {
-  margin-top: 2.5rem;
-  display: flex;
-  justify-content: center;
+.dot::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--lilac);
+  opacity: 0.45;
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+
+.dotActive::after {
+  opacity: 1;
+  transform: scale(1.15);
+  background: var(--navy);
 }

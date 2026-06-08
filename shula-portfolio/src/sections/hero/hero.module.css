@@ -5,6 +5,12 @@
   overflow: hidden;
 }
 
+@media (max-width: 639px) {
+  .heroSection {
+    min-height: auto;
+  }
+}
+
 .heroGradientOrb {
   pointer-events: none;
   position: absolute;
@@ -25,13 +31,22 @@
 .heroGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
+  gap: 2.5rem;
   align-items: center;
-  min-height: calc(100vh - 80px);
-  padding-top: 7rem;
-  padding-bottom: 5.5rem;
+  min-height: auto;
+  padding-top: 5.5rem;
+  padding-bottom: 6.5rem;
   position: relative;
   z-index: 1;
+}
+
+@media (min-width: 640px) {
+  .heroGrid {
+    gap: 3rem;
+    min-height: calc(100vh - 80px);
+    padding-top: 6.5rem;
+    padding-bottom: 5.5rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -55,11 +70,32 @@
   max-width: 36rem;
 }
 
+@media (max-width: 767px) {
+  .copyBlock {
+    order: 2;
+    max-width: 100%;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .portraitColumn {
+    order: 1;
+  }
+
+  .intro {
+    margin-inline: auto;
+  }
+
+  .ctaRow {
+    justify-content: center;
+  }
+}
+
 .greeting {
   display: block;
   margin-bottom: 0.5rem;
   font-family: var(--font-sora), system-ui, sans-serif;
-  font-size: 1.25rem;
+  font-size: clamp(1.05rem, 1rem + 0.5vw, 1.25rem);
   font-weight: 700;
   color: var(--navy);
 }
@@ -80,20 +116,37 @@
 .roleBadge {
   display: inline-block;
   margin-top: 1.25rem;
-  padding: 0.5rem 1.25rem;
-  font-size: 0.8rem;
+  padding: 0.45rem 1rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
+  line-height: 1.4;
+  text-align: center;
   color: var(--white);
   background: var(--navy);
   border-radius: 999px;
   box-shadow: var(--shadow-card);
+  max-width: 100%;
+}
+
+@media (min-width: 480px) {
+  .roleBadge {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .roleBadge {
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+  }
 }
 
 .intro {
   margin-top: 1.5rem;
   max-width: 34rem;
-  font-size: 0.975rem;
+  font-size: var(--text-body);
   line-height: 1.85;
   color: var(--text-muted);
 }
@@ -108,8 +161,24 @@
 .ctaRow {
   margin-top: 1.75rem;
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ctaRow > * {
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  .ctaRow {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .ctaRow > * {
+    width: auto;
+  }
 }
 
 .portraitColumn {
@@ -128,7 +197,7 @@
 .portraitWrapper {
   position: relative;
   width: 100%;
-  max-width: 380px;
+  max-width: min(380px, 88vw);
   margin-inline: auto;
 }
 
@@ -141,14 +210,21 @@
 
 .frameBack {
   position: absolute;
-  top: -12px;
-  right: -12px;
+  top: -8px;
+  right: -8px;
   width: 100%;
   height: 100%;
   border-radius: var(--radius-xl);
   border: 2px solid var(--lilac);
   background: linear-gradient(135deg, var(--lilac-soft), var(--dirty-white));
   z-index: 0;
+}
+
+@media (min-width: 640px) {
+  .frameBack {
+    top: -12px;
+    right: -12px;
+  }
 }
 
 .portraitCard {

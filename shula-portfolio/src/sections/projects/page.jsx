@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { site } from "@/data/site";
 import Container from "@/components/layout/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
-import Button from "@/components/ui/Button";
 import ProjectCard from "./ProjectCard";
 import styles from "./projects.module.css";
 
@@ -18,6 +17,7 @@ export default function Portfolio() {
   const { portfolio } = site;
   const { projects } = portfolio;
   const [active, setActive] = useState(0);
+  const touchStartX = useRef(null);
 
   const goPrev = useCallback(() => {
     setActive((i) => getIndex(i - 1, projects.length));
@@ -41,7 +41,20 @@ export default function Portfolio() {
       <Container>
         <SectionHeading title={portfolio.title} />
 
-        <div className={styles.carouselWrap}>
+        <div
+          className={styles.carouselWrap}
+          onTouchStart={(event) => {
+            touchStartX.current = event.touches[0]?.clientX ?? null;
+          }}
+          onTouchEnd={(event) => {
+            if (touchStartX.current === null) return;
+            const deltaX = event.changedTouches[0]?.clientX - touchStartX.current;
+            touchStartX.current = null;
+            if (Math.abs(deltaX) < 48) return;
+            if (deltaX < 0) goNext();
+            else goPrev();
+          }}
+        >
           <motion.button
             type="button"
             className={`${styles.navBtn} ${styles.navBtnLeft}`}
@@ -102,17 +115,6 @@ export default function Portfolio() {
             />
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className={styles.ctaWrap}
-        >
-          <Button href={portfolio.ctaHref} variant="secondary">
-            {portfolio.cta}
-          </Button>
-        </motion.div>
       </Container>
     </section>
   );
