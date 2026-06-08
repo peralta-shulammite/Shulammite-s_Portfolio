@@ -6,6 +6,7 @@ import { Code2, Settings, Palette, Paintbrush, ChevronLeft, ChevronRight } from 
 import { site } from "@/data/site";
 import Container from "@/components/layout/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { hoverLift, viewportOnce } from "@/lib/motion";
 
 const iconMap = {
   code: Code2,
@@ -33,23 +34,27 @@ export default function Skills() {
         <SectionHeading title={skills.title} />
 
         <div className="relative">
-          <button
+          <motion.button
             type="button"
             onClick={() => scroll("left")}
             aria-label="Scroll skills left"
-            className="absolute -left-2 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-lilac bg-white/80 text-navy shadow-md backdrop-blur-sm transition-all hover:border-navy/30 hover:bg-lilac-soft lg:flex"
+            whileHover={{ scale: 1.06 }}
+            whileTap={{ scale: 0.95 }}
+            className="absolute -left-2 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-lilac bg-white/80 text-navy shadow-md backdrop-blur-sm transition-colors hover:border-navy/30 hover:bg-lilac-soft lg:flex"
           >
             <ChevronLeft size={20} />
-          </button>
+          </motion.button>
 
-          <button
+          <motion.button
             type="button"
             onClick={() => scroll("right")}
             aria-label="Scroll skills right"
-            className="absolute -right-2 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-lilac bg-white/80 text-navy shadow-md backdrop-blur-sm transition-all hover:border-navy/30 hover:bg-lilac-soft lg:flex"
+            whileHover={{ scale: 1.06 }}
+            whileTap={{ scale: 0.95 }}
+            className="absolute -right-2 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-lilac bg-white/80 text-navy shadow-md backdrop-blur-sm transition-colors hover:border-navy/30 hover:bg-lilac-soft lg:flex"
           >
             <ChevronRight size={20} />
-          </button>
+          </motion.button>
 
           <div
             ref={scrollRef}
@@ -63,9 +68,10 @@ export default function Skills() {
                   key={item.id}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.08 }}
-                  className="glass-card min-w-[260px] flex-shrink-0 snap-start rounded-2xl p-6 transition-shadow hover:shadow-[var(--shadow-hover)] sm:min-w-[280px] lg:min-w-[calc(25%-15px)]"
+                  viewport={viewportOnce}
+                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                  whileHover={hoverLift}
+                  className="glass-card min-w-[260px] flex-shrink-0 snap-start rounded-2xl p-6 transition-[box-shadow,border-color] hover:border-lilac hover:shadow-[var(--shadow-hover)] sm:min-w-[280px] lg:min-w-[calc(25%-15px)]"
                 >
                   <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-lilac-soft to-lilac">
                     <Icon size={22} className="text-navy" strokeWidth={1.5} aria-hidden />

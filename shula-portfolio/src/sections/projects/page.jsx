@@ -42,14 +42,16 @@ export default function Portfolio() {
         <SectionHeading title={portfolio.title} />
 
         <div className={styles.carouselWrap}>
-          <button
+          <motion.button
             type="button"
             className={`${styles.navBtn} ${styles.navBtnLeft}`}
             onClick={goPrev}
             aria-label="Previous project"
+            whileHover={{ scale: 1.06 }}
+            whileTap={{ scale: 0.94 }}
           >
             <ChevronLeft size={22} />
-          </button>
+          </motion.button>
 
           <div className={styles.track}>
             <AnimatePresence mode="popLayout" initial={false}>
@@ -76,14 +78,16 @@ export default function Portfolio() {
             </AnimatePresence>
           </div>
 
-          <button
+          <motion.button
             type="button"
             className={`${styles.navBtn} ${styles.navBtnRight}`}
             onClick={goNext}
             aria-label="Next project"
+            whileHover={{ scale: 1.06 }}
+            whileTap={{ scale: 0.94 }}
           >
             <ChevronRight size={22} />
-          </button>
+          </motion.button>
         </div>
 
         <div className={styles.dots}>

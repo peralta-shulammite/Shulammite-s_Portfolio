@@ -88,8 +88,14 @@
   color: var(--navy);
 }
 
-.navLink:hover::after {
+.navLink:hover::after,
+.navLinkActive::after {
   width: 100%;
+}
+
+.navLinkActive {
+  color: var(--navy);
+  text-shadow: 0 0 18px rgba(214, 198, 230, 0.55);
 }
 
 .menuToggle {
@@ -129,7 +135,8 @@
   transition: color 0.2s ease;
 }
 
-.mobileLink:hover {
+.mobileLink:hover,
+.mobileLinkActive {
   color: var(--navy);
 }
 

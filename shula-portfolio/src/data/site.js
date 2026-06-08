@@ -39,6 +39,12 @@ export const site = {
     workHref: "#work",
     image: "/images/shulammite-portrait.png",
     imageAlt: "Shulammite Peralta — Web Developer & UI/UX Designer",
+    floatingBadges: [
+      { label: "Frontend Developer", position: "top-right", delay: 0 },
+      { label: "UI/UX Designer", position: "mid-left", delay: 0.2 },
+      { label: "Creative Thinker", position: "bottom-left", delay: 0.4 },
+    ],
+    techTags: ["React", "Next.js", "Figma"],
   },
   services: {
     title: "What I Do",
@@ -68,20 +74,98 @@ export const site = {
   },
   about: {
     title: "About Me",
-    paragraphs: [
-      "I'm a web developer and graphic designer passionate about creating digital experiences that feel luxurious yet approachable. With a keen eye for typography, color, and layout, I transform ideas into websites and visuals that tell your story beautifully.",
-      "Whether you need a full website build, brand collateral, or a design brought to life in code, I bring creativity, attention to detail, and a collaborative spirit to every project.",
-    ],
-    highlights: [
-      "Responsive, modern websites tailored to your brand",
-      "Graphic design for web, social, and print",
-      "Clean handoff from design mockups to production code",
-    ],
+    paragraph:
+      "I'm passionate about crafting digital experiences that feel intentional from the first glance to the final interaction. With a creative mindset and a careful eye for detail, I focus on blending aesthetics with functionality—building work that is visually refined, thoughtfully structured, and genuinely meaningful for the people who use it.",
+    philosophyLabel: "My Philosophy",
+    philosophy:
+      "I believe great design is not only seen but felt through every interaction.",
+    signature: "— Shulammite Peralta",
     image: "/images/shulammite-portrait.png",
     imageAlt: "Shulammite Peralta professional portrait",
   },
+  education: {
+    title: "Education & Experience",
+    honor: "Magna Cum Laude",
+    degree: "Bachelor of Science in Information Technology",
+    classOf: "Class of 2026",
+    awardsTitle: "Awards & Recognition",
+    awards: [
+      "Jonathan Gay Award",
+      "Special Academic Award",
+      "Lovelace Award",
+      "Distinguished Member of Circulo Sobresaliente",
+    ],
+    experience: [
+      {
+        id: 1,
+        startYear: 2021,
+        period: "September – December 2021",
+        title: "Bookkeeper",
+        company: "Levine and Associates",
+        badge: "Part-timer",
+      },
+      {
+        id: 2,
+        startYear: 2023,
+        period: "July 2023",
+        title: "Virtual Assistant",
+        company: "Mullins PC",
+        badge: "Part-timer",
+      },
+      {
+        id: 3,
+        startYear: 2025,
+        period: "2025 – 2026",
+        title: "OJT",
+        company: "La Visionario",
+      },
+    ],
+  },
+  certifications: {
+    title: "Certifications & Professional Development",
+    intro:
+      "Continuous learning and professional development through certifications, workshops, and industry-focused training programs.",
+    certificationsTitle: "Certifications",
+    trainingsTitle: "Trainings & Seminars",
+    certifications: [
+      {
+        id: 1,
+        icon: "ux",
+        title: "UXPH Certification",
+        issuer: "User Experience Philippines (UXPH)",
+        description:
+          "Recognized credential affirming knowledge of user-centered design, usability principles, and UX practices within the Philippine design community.",
+      },
+      {
+        id: 2,
+        icon: "analytics",
+        title: "Certiport IT Specialist Certification",
+        issuer: "Data Analytics",
+        description:
+          "Industry-validated certification demonstrating applied skills in data analysis concepts, interpretation, and analytics-focused problem solving.",
+      },
+    ],
+    trainings: [
+      {
+        id: 1,
+        icon: "ai",
+        title: "AI Webinar",
+        issuer: "Attendee",
+        description:
+          "Participated in sessions exploring artificial intelligence trends, practical applications, and emerging tools shaping modern digital workflows.",
+      },
+      {
+        id: 2,
+        icon: "python",
+        title: "Python Guessing Game Webinar",
+        issuer: "Attendee",
+        description:
+          "Engaged in a hands-on webinar focused on Python fundamentals through interactive exercises and guided development of a guessing game project.",
+      },
+    ],
+  },
   portfolio: {
-    title: "Portfolio",
+    title: "Featured Works",
     cta: "View My Projects",
     ctaHref: "#work",
     projects: [
@@ -168,10 +252,13 @@ export const site = {
       },
     ],
   },
-  cta: {
-    title: "Have a project in mind? Let's build something great together.",
+  contact: {
+    title: "Contact",
+    subtitle:
+      "Have a project in mind? I'd love to hear from you. Reach out and let's build something great together.",
+    email: "peraltashulammite@gmail.com",
     hireCta: "Hire Me",
-    hireHref: "#contact",
+    hireHref: "mailto:peraltashulammite@gmail.com",
     workCta: "View My Work",
     workHref: "#work",
   },

@@ -1,4 +1,5 @@
 import { Manrope, Playfair_Display, Sora } from "next/font/google";
+import Preloader from "@/components/preloader";
 import "./globals.css";
 
 const sora = Sora({
@@ -32,6 +33,7 @@ export default function RootLayout({ children }) {
       className={`${sora.variable} ${manrope.variable} ${playfair.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans text-foreground">
+        <Preloader />
         {children}
       </body>
     </html>

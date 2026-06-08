@@ -1,7 +1,8 @@
 "use client";
 
-import { ArrowUp } from "lucide-react";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { HiOutlineArrowUp } from "react-icons/hi";
 import { site } from "@/data/site";
 import Container from "@/components/layout/Container";
 
@@ -22,10 +23,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer
-      id="contact"
-      className="relative border-t border-lilac/35 bg-navy py-8 text-white sm:py-9"
-    >
+    <footer className="relative border-t border-lilac/35 bg-navy py-8 text-white sm:py-9">
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-lilac/50 to-transparent"
         aria-hidden
@@ -39,16 +37,24 @@ export default function Footer() {
         </div>
       </Container>
 
-      <button
+      <motion.button
         type="button"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         aria-label="Back to top"
-        className={`fixed bottom-6 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-lilac/95 text-navy shadow-[0_14px_26px_rgba(13,27,61,0.22)] transition-all duration-300 hover:-translate-y-1 hover:bg-lilac ${
-          showTop ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none translate-y-2"
+        initial={false}
+        animate={{
+          opacity: showTop ? 1 : 0,
+          y: showTop ? 0 : 8,
+        }}
+        whileHover={showTop ? { scale: 1.08, y: -2 } : undefined}
+        whileTap={{ scale: 0.95 }}
+        transition={{ duration: 0.3 }}
+        className={`fixed bottom-6 right-6 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-lilac/95 text-navy shadow-[0_14px_26px_rgba(13,27,61,0.22)] hover:bg-lilac ${
+          showTop ? "pointer-events-auto" : "pointer-events-none"
         }`}
       >
-        <ArrowUp size={18} aria-hidden />
-      </button>
+        <HiOutlineArrowUp size={18} aria-hidden />
+      </motion.button>
     </footer>
   );
 }

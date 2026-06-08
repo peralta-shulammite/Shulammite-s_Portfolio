@@ -152,6 +152,7 @@
   background: var(--white);
   box-shadow: var(--shadow-elevated);
   border: 1px solid rgba(214, 198, 230, 0.35);
+  transition: box-shadow 0.35s ease;
 }
 
 .imageWrap {
@@ -168,7 +169,25 @@
 }
 
 .card:hover .image {
-  transform: scale(1.04);
+  transform: scale(1.06);
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(13, 27, 61, 0.28) 0%,
+    rgba(13, 27, 61, 0.04) 45%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.card:hover .imageOverlay {
+  opacity: 1;
 }
 
 .ratingBadge {

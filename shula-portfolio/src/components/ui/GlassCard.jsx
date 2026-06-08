@@ -11,7 +11,7 @@ export default function GlassCard({
     <motion.div
       whileHover={{ y: -6, boxShadow: "var(--shadow-hover)" }}
       transition={{ type: "spring", stiffness: 300, damping: 22 }}
-      className={`glass-card rounded-2xl p-6 lg:p-8 transition-shadow duration-300 hover:border-lilac ${className}`}
+      className={`glass-card group rounded-2xl p-6 lg:p-8 transition-[box-shadow,border-color] duration-300 hover:border-lilac hover:shadow-[var(--shadow-hover)] ${className}`}
       {...motionProps}
     >
       {children}
