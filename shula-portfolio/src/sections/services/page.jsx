@@ -1,6 +1,6 @@
 "use client";
 
-import { Code2, Settings, Palette } from "lucide-react";
+import { Code2, PenTool, Layers } from "lucide-react";
 import { site } from "@/data/site";
 import Container from "@/components/layout/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -8,8 +8,8 @@ import GlassCard from "@/components/ui/GlassCard";
 
 const iconMap = {
   code: Code2,
-  settings: Settings,
-  palette: Palette,
+  "pen-tool": PenTool,
+  layers: Layers,
 };
 
 export default function Services() {

@@ -7,6 +7,7 @@ import { site } from "@/data/site";
 import Container from "@/components/layout/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ProjectCard from "./ProjectCard";
+import ProjectGalleryModal from "./ProjectGalleryModal";
 import styles from "./projects.module.css";
 
 function getIndex(i, length) {
@@ -17,7 +18,16 @@ export default function Portfolio() {
   const { portfolio } = site;
   const { projects } = portfolio;
   const [active, setActive] = useState(0);
+  const [galleryProject, setGalleryProject] = useState(null);
   const touchStartX = useRef(null);
+
+  const openGallery = useCallback((project) => {
+    setGalleryProject(project);
+  }, []);
+
+  const closeGallery = useCallback(() => {
+    setGalleryProject(null);
+  }, []);
 
   const goPrev = useCallback(() => {
     setActive((i) => getIndex(i - 1, projects.length));
@@ -85,6 +95,7 @@ export default function Portfolio() {
                   <ProjectCard
                     project={project}
                     isCenter={position === "center"}
+                    onOpenGallery={openGallery}
                   />
                 </motion.div>
               ))}
@@ -116,6 +127,12 @@ export default function Portfolio() {
           ))}
         </div>
       </Container>
+
+      <ProjectGalleryModal
+        project={galleryProject}
+        isOpen={galleryProject !== null}
+        onClose={closeGallery}
+      />
     </section>
   );
 }

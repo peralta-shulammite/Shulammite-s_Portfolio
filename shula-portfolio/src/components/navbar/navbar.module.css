@@ -190,90 +190,133 @@
   }
 }
 
-.dropdownBackdrop {
+/* Full-screen mobile overlay menu */
+.mobileOverlay {
   position: fixed;
   inset: 0;
-  z-index: 51;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2rem, 8vw, 4rem);
+  background: rgba(13, 27, 61, 0.94);
+  backdrop-filter: blur(28px) saturate(120%);
+  -webkit-backdrop-filter: blur(28px) saturate(120%);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.overlayClose {
+  position: fixed;
+  top: clamp(1rem, 4vw, 1.75rem);
+  right: clamp(1rem, 4vw, 1.75rem);
+  z-index: 101;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--touch-min);
+  height: var(--touch-min);
   border: none;
+  border-radius: 50%;
   background: transparent;
-  cursor: default;
+  color: var(--lilac);
+  cursor: pointer;
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
 }
 
-.dropdown {
-  position: absolute;
-  top: calc(100% + 0.625rem);
-  right: 0;
-  z-index: 53;
-  min-width: 12.5rem;
-  padding: 0.5rem;
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(214, 198, 230, 0.55);
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow:
-    0 12px 40px rgba(13, 27, 61, 0.1),
-    0 0 0 1px rgba(255, 255, 255, 0.6) inset,
-    0 4px 24px rgba(214, 198, 230, 0.22);
-  transform-origin: top right;
+.overlayClose:hover {
+  color: var(--white);
+  background: rgba(214, 198, 230, 0.12);
 }
 
-.dropdownList {
+.overlayClose:focus-visible {
+  outline: 2px solid var(--lilac);
+  outline-offset: 3px;
+}
+
+.overlayNav {
+  width: min(100%, 22rem);
+}
+
+.overlayList {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  width: 100%;
 }
 
-.dropdownLink {
+.overlayItem {
+  border-bottom: 1px solid rgba(214, 198, 230, 0.14);
+}
+
+.overlayItem:first-child {
+  border-top: 1px solid rgba(214, 198, 230, 0.14);
+}
+
+.overlayLink {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: var(--touch-min);
-  padding: 0.625rem 1.25rem;
-  font-family: var(--font-sora), system-ui, sans-serif;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  min-height: clamp(3.25rem, 12vw, 4rem);
+  padding: 0.75rem 1rem;
   text-decoration: none;
-  text-align: center;
-  color: var(--text-muted);
-  border-radius: var(--radius-md);
-  transition:
-    color 0.22s ease,
-    background 0.22s ease;
+  transition: background 0.3s ease;
 }
 
-.dropdownLink:hover {
-  color: var(--navy);
-  background: rgba(214, 198, 230, 0.32);
-}
-
-.dropdownLink:focus-visible {
+.overlayLink:focus-visible {
   outline: 2px solid var(--lilac);
-  outline-offset: 2px;
+  outline-offset: -2px;
 }
 
-.dropdownLink:active {
-  background: rgba(214, 198, 230, 0.45);
+@media (hover: hover) and (pointer: fine) {
+  .overlayLink:hover {
+    background: rgba(214, 198, 230, 0.06);
+  }
 }
 
-.dropdownLinkActive {
-  color: var(--navy);
-  background: rgba(214, 198, 230, 0.42);
+.overlayLink:active {
+  background: rgba(214, 198, 230, 0.1);
 }
 
-.dropdownIndicator {
+.overlayLinkText {
+  display: inline-block;
+  font-family: var(--font-sora), system-ui, sans-serif;
+  font-size: clamp(0.8125rem, 2.8vw, 0.9375rem);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(242, 239, 230, 0.78);
+  transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .overlayLink:hover .overlayLinkText {
+    color: var(--white);
+    letter-spacing: 0.18em;
+  }
+}
+
+.overlayLinkActive .overlayLinkText {
+  color: var(--lilac);
+}
+
+.overlayIndicator {
   position: absolute;
-  bottom: 0.35rem;
+  bottom: 0.65rem;
   left: 50%;
-  width: 1.25rem;
+  width: 1.5rem;
   height: 2px;
   border-radius: 2px;
   background: var(--gradient-accent);
   transform: translateX(-50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlayLinkText {
+    transition: color 0.15s ease;
+  }
 }

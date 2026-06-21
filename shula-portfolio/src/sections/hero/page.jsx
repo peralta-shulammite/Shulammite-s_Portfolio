@@ -120,9 +120,11 @@ export default function Hero() {
                   <Image
                     src={hero.image}
                     alt={hero.imageAlt}
-                    width={800}
-                    height={1000}
+                    width={912}
+                    height={1079}
                     priority
+                    quality={90}
+                    sizes="(max-width: 640px) 84vw, (max-width: 1024px) 380px, 360px"
                     className={styles.portraitImg}
                   />
                 </div>

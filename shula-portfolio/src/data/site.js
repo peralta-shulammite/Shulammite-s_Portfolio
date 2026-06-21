@@ -37,14 +37,19 @@ export const site = {
     hireHref: "#contact",
     workCta: "View My Work",
     workHref: "#work",
-    image: "/images/shulammite-portrait.png",
-    imageAlt: "Shulammite Peralta — Web Developer & UI/UX Designer",
+    image: "/images/Shulammite Peralta.png",
+    imageAlt:
+      "Shulammite Peralta — professional portrait in a navy suit",
     floatingBadges: [
       { label: "Frontend Developer", position: "top-right", delay: 0 },
       { label: "UI/UX Designer", position: "mid-left", delay: 0.2 },
       { label: "Creative Thinker", position: "bottom-left", delay: 0.4 },
     ],
-    techTags: ["React", "Next.js", "Figma"],
+    techTags: [
+      { label: "React", position: "tech-top-left", delay: 0 },
+      { label: "Next.js", position: "tech-bottom-right", delay: 0.15 },
+      { label: "Figma", position: "tech-mid-right", delay: 0.3 },
+    ],
   },
   services: {
     title: "What I Do",
@@ -53,22 +58,22 @@ export const site = {
         id: "web-dev",
         title: "Web Development",
         description:
-          "Custom, responsive websites built with modern frameworks — fast, accessible, and tailored to your brand's personality.",
+          "Building responsive, accessible, and user-friendly websites using modern web technologies and best practices.",
         icon: "code",
       },
       {
-        id: "website-setup",
-        title: "Website Setup",
+        id: "ui-ux-design",
+        title: "UI/UX & Visual Design",
         description:
-          "End-to-end launch support: hosting, domain setup, CMS configuration, and polish so your site goes live smoothly.",
-        icon: "settings",
+          "Creating intuitive user experiences, wireframes, prototypes, and visually engaging designs using Figma and Canva while focusing on usability, accessibility, and user-centered design principles.",
+        icon: "pen-tool",
       },
       {
         id: "design-to-code",
         title: "Design to Code",
         description:
-          "Pixel-perfect implementation of your mockups and brand assets into clean, maintainable front-end code.",
-        icon: "palette",
+          "Transforming Figma mockups and design concepts into clean, responsive, and maintainable frontend code with attention to detail, consistency, and performance.",
+        icon: "layers",
       },
     ],
   },
@@ -80,8 +85,9 @@ export const site = {
     philosophy:
       "I believe great design is not only seen but felt through every interaction.",
     signature: "— Shulammite Peralta",
-    image: "/images/shulammite-portrait.png",
-    imageAlt: "Shulammite Peralta professional portrait",
+    image: "/images/peralta-portraitgrad.png",
+    imageAlt:
+      "Shulammite Peralta — graduation portrait at Faith Colleges",
   },
   education: {
     title: "Education & Experience",
@@ -171,55 +177,102 @@ export const site = {
     projects: [
       {
         id: 1,
-        title: "Luxe Studio",
-        subtitle: "Business Portfolio Website",
+        title: "DishCovery",
+        subtitle: "Food Discovery Platform",
         category: "Web Development",
         location: "Remote",
-        duration: "3 mos",
-        rating: "5.0",
-        tags: ["RESPONSIVE", "NEXT.JS", "UI/UX"],
-        image:
-          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=520&fit=crop&q=80",
-        href: "#",
+        duration: "2024",
+        tags: ["REACT", "NEXT.JS", "TAILWIND CSS", "REST API"],
+        image: "/images/DishCovery - Logo (2).png",
+        description:
+          "As Frontend Developer, I built responsive interfaces for restaurant discovery and filtering, implemented interactive search and navigation components, and integrated REST API data flows — delivering a seamless, mobile-first dining exploration experience in collaboration with the development team.",
+        href: "https://dishcovery-frontend-tau.vercel.app/user/home",
+        linkType: "external",
       },
       {
         id: 2,
-        title: "Bloom Wellness",
-        subtitle: "E-Commerce & Brand Site",
+        title: "HF Boutique",
+        subtitle: "Fashion E-Commerce Website",
         category: "Web Development",
         location: "Philippines",
-        duration: "4 mos",
-        rating: "5.0",
-        tags: ["E-COMMERCE", "WORDPRESS", "BRANDING"],
-        image:
-          "https://images.unsplash.com/photo-1551650974-3fb9569c0f0e?w=800&h=520&fit=crop&q=80",
-        href: "#",
+        duration: "2024",
+        tags: ["HTML", "CSS", "JAVASCRIPT", "RESPONSIVE DESIGN"],
+        image: "/images/HFBotique-Logo.png",
+        description:
+          "Contributed as Frontend Developer by translating UI/UX designs into polished, responsive web layouts, building interactive product showcase interfaces, and ensuring elegant cross-device presentation — collaborating closely with designers to bring the boutique brand identity online.",
+        href: "https://drive.google.com/file/d/1FGkphwOlQSQXLnbjJKXW6SNfp6XKU_FG/view?usp=sharing",
+        linkType: "external",
       },
       {
         id: 3,
-        title: "Artisan Events",
-        subtitle: "Poster & Print Collection",
-        category: "Graphic Design",
+        title: "La Visionario",
+        subtitle: "Funeral Services E-Commerce Platform",
+        category: "Web Development",
         location: "Metro Manila",
-        duration: "2 mos",
-        rating: "5.0",
-        tags: ["POSTERS", "PRINT DESIGN", "LAYOUT"],
-        image:
-          "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=520&fit=crop&q=80",
-        href: "#",
-      },
-      {
-        id: 4,
-        title: "Serene Living",
-        subtitle: "Website UI Mockups",
-        category: "UI Design",
-        location: "Remote",
-        duration: "6 wks",
-        rating: "5.0",
-        tags: ["FIGMA", "WIREFRAMES", "PROTOTYPE"],
-        image:
-          "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=520&fit=crop&q=80",
-        href: "#",
+        duration: "2025 – 2026",
+        tags: ["REACT", "JAVASCRIPT", "CSS", "UI/UX"],
+        image: "/images/Lavisionario-Logo.jpeg",
+        description:
+          "Developed during my OJT as Frontend Developer — I implemented responsive page layouts, built interactive UI components, and collaborated with the development team on feature integration and design handoffs. This confidential project showcases my work on modern web interfaces without public deployment.",
+        linkType: "gallery",
+        gallery: [
+          {
+            src: "/images/LV-LandingPage.png",
+            alt: "La Visionario landing page with hero section and navigation",
+            label: "Landing Page",
+            description:
+              "Hero section with full-width imagery, dual-tier navigation, and a prominent call-to-action — establishing the brand's dignified, modern visual identity.",
+          },
+          {
+            src: "/images/LV-ShopCategory.png",
+            alt: "La Visionario shop by category carousel",
+            label: "Shop by Category",
+            description:
+              "Interactive category carousel with swipe navigation, letting families browse cremation, memorial planning, and traditional burial services at a glance.",
+          },
+          {
+            src: "/images/LV-Shop.png",
+            alt: "La Visionario service listing with filters and product grid",
+            label: "Service Shop",
+            description:
+              "Filterable service grid with sidebar categories, location search, provider ratings, and responsive product cards — built for seamless cross-device browsing.",
+          },
+          {
+            src: "/images/LV-Checkout.png",
+            alt: "La Visionario product detail page with booking options",
+            label: "Product Detail",
+            description:
+              "Service detail view with image gallery, pricing, quantity controls, and dual CTAs — translating complex booking flows into a clear, trustworthy interface.",
+          },
+          {
+            src: "/images/LV-Cart.png",
+            alt: "La Visionario shopping cart with order summary",
+            label: "Shopping Cart",
+            description:
+              "Multi-item cart with quantity management, provider details, and an order summary sidebar — designed for transparent pricing and a smooth checkout path.",
+          },
+          {
+            src: "/images/LV-UserLogin.png",
+            alt: "La Visionario split-screen login and sign-up page",
+            label: "User Authentication",
+            description:
+              "Split-screen auth layout with social login, email/password forms, and password visibility toggle — a polished, accessible entry point for new and returning users.",
+          },
+          {
+            src: "/images/LV-SellerDashBoard.png",
+            alt: "La Visionario seller centre dashboard with KPI cards",
+            label: "Seller Dashboard",
+            description:
+              "Seller Centre with revenue KPIs, quick-action cards, and sales analytics — a data-rich workspace I helped structure for provider-side order and listing management.",
+          },
+          {
+            src: "/images/LV-AdminDashboard.png",
+            alt: "La Visionario admin portal with charts and activity feed",
+            label: "Admin Dashboard",
+            description:
+              "Admin Portal featuring commission charts, escrow tracking, dispute alerts, and recent activity — demonstrating my work on complex, role-based dashboard interfaces.",
+          },
+        ],
       },
     ],
   },
@@ -227,28 +280,80 @@ export const site = {
     title: "Skills",
     items: [
       {
-        id: "web-dev",
-        title: "Web Development",
-        skills: ["HTML & CSS", "JavaScript", "React / Next.js", "Responsive Design"],
+        id: "frontend-web",
+        title: "Frontend & Web Development",
+        skills: [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "React.js",
+          "Responsive Web Design",
+          "PHP",
+          "Java",
+          "Node.js",
+        ],
         icon: "code",
       },
       {
-        id: "website-setup",
-        title: "Website Setup",
-        skills: ["WordPress", "Hosting & DNS", "CMS Setup", "Performance Tuning"],
-        icon: "settings",
-      },
-      {
-        id: "design-to-code",
-        title: "Design to Code",
-        skills: ["Figma to Code", "Tailwind CSS", "Component Libraries", "Accessibility"],
+        id: "ui-ux-design",
+        title: "UI/UX & Design",
+        skills: [
+          "UI/UX Design",
+          "Figma",
+          "Canva",
+          "Wireframing",
+          "Prototyping",
+          "Graphic Design",
+          "Design-to-Code Implementation",
+        ],
         icon: "palette",
       },
       {
-        id: "graphic",
-        title: "Graphic Designing",
-        skills: ["Brand Identity", "Posters & Flyers", "Social Media Graphics", "Adobe Suite"],
-        icon: "brush",
+        id: "tools-tech",
+        title: "Tools & Technologies",
+        skills: [
+          "Git",
+          "GitHub",
+          "VS Code",
+          "Vercel",
+          "MySQL",
+          "Database Management",
+        ],
+        icon: "settings",
+      },
+      {
+        id: "it-foundations",
+        title: "IT & Technical Foundations",
+        skills: [
+          "Cisco Networking Fundamentals",
+          "Data Analytics Fundamentals",
+        ],
+        icon: "network",
+      },
+      {
+        id: "admin-support",
+        title: "Administrative & Client Support",
+        skills: [
+          "Email Management",
+          "Document Processing",
+          "Data Entry",
+          "Client Communication",
+          "Administrative Support",
+          "Organization",
+        ],
+        icon: "briefcase",
+      },
+      {
+        id: "professional",
+        title: "Professional Competencies",
+        skills: [
+          "Problem-Solving",
+          "Team Collaboration",
+          "Adaptability",
+          "Attention to Detail",
+          "Time Management",
+        ],
+        icon: "users",
       },
     ],
   },

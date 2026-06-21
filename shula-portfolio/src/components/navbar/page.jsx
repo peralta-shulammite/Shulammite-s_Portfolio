@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -10,21 +11,21 @@ import useActiveSection from "@/hooks/useActiveSection";
 import { EASE_OUT } from "@/lib/motion";
 import styles from "./navbar.module.css";
 
-const dropdownSpring = { type: "spring", stiffness: 420, damping: 32, mass: 0.65 };
+const overlaySpring = { type: "spring", stiffness: 380, damping: 34, mass: 0.72 };
 
-const dropdownItem = {
-  hidden: { opacity: 0, y: 8 },
+const overlayItem = {
+  hidden: { opacity: 0, y: 18 },
   visible: (index) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.35, delay: 0.04 + index * 0.05, ease: EASE_OUT },
+    transition: { duration: 0.45, delay: 0.08 + index * 0.06, ease: EASE_OUT },
   }),
 };
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef(null);
+  const [mounted, setMounted] = useState(false);
 
   const sectionIds = useMemo(
     () => site.nav.map((item) => item.href.replace("#", "")),
@@ -43,24 +44,23 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    document.body.classList.toggle("menu-open", menuOpen);
+    return () => document.body.classList.remove("menu-open");
+  }, [menuOpen]);
+
+  useEffect(() => {
     if (!menuOpen) return undefined;
 
     const onKeyDown = (event) => {
       if (event.key === "Escape") closeMenu();
     };
 
-    const onPointerDown = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        closeMenu();
-      }
-    };
-
     document.addEventListener("keydown", onKeyDown);
-    document.addEventListener("pointerdown", onPointerDown);
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-      document.removeEventListener("pointerdown", onPointerDown);
-    };
+    return () => document.removeEventListener("keydown", onKeyDown);
   }, [menuOpen, closeMenu]);
 
   const handleNavClick = useCallback(
@@ -116,39 +116,67 @@ export default function Navbar() {
             })}
           </ul>
 
-          <div ref={menuRef} className={styles.menuWrapper}>
+          <div className={styles.menuWrapper}>
             <motion.button
               type="button"
               className={`${styles.menuToggle} ${menuOpen ? styles.menuToggleOpen : ""}`}
               onClick={toggleMenu}
               aria-expanded={menuOpen}
-              aria-controls="mobile-nav-dropdown"
-              aria-haspopup="true"
+              aria-controls="mobile-nav-overlay"
+              aria-haspopup="dialog"
               aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
               whileTap={{ scale: 0.94 }}
             >
-              {menuOpen ? <X size={20} aria-hidden /> : <Menu size={20} aria-hidden />}
+              <Menu size={20} aria-hidden />
             </motion.button>
+          </div>
+        </nav>
+      </Container>
 
-            <AnimatePresence>
-              {menuOpen && (
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {menuOpen && (
+              <motion.div
+                id="mobile-nav-overlay"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Mobile navigation"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.35, ease: EASE_OUT }}
+                className={styles.mobileOverlay}
+              >
+                <motion.button
+                  type="button"
+                  className={styles.overlayClose}
+                  onClick={closeMenu}
+                  aria-label="Close navigation menu"
+                  initial={{ opacity: 0, rotate: -45 }}
+                  animate={{ opacity: 1, rotate: 0 }}
+                  exit={{ opacity: 0, rotate: 45 }}
+                  transition={{ duration: 0.35, delay: 0.05, ease: EASE_OUT }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <X size={22} strokeWidth={1.75} aria-hidden />
+                </motion.button>
+
                 <motion.nav
-                  id="mobile-nav-dropdown"
-                  role="menu"
-                  aria-label="Mobile navigation"
-                  initial={{ opacity: 0, scale: 0.9, y: -10 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.92, y: -6 }}
-                  transition={dropdownSpring}
-                  className={styles.dropdown}
+                  aria-label="Mobile navigation links"
+                  className={styles.overlayNav}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  transition={{ duration: 0.4, ease: EASE_OUT }}
                 >
                   <motion.ul
-                    className={styles.dropdownList}
+                    className={styles.overlayList}
                     initial="hidden"
                     animate="visible"
                     variants={{
                       hidden: {},
-                      visible: { transition: { staggerChildren: 0.05, delayChildren: 0.06 } },
+                      visible: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
                     }}
                   >
                     {site.nav.map((item, index) => {
@@ -156,20 +184,31 @@ export default function Navbar() {
                       const isActive = activeSection === id;
 
                       return (
-                        <motion.li key={item.href} custom={index} variants={dropdownItem}>
+                        <motion.li
+                          key={item.href}
+                          custom={index}
+                          variants={overlayItem}
+                          className={styles.overlayItem}
+                        >
                           <Link
                             href={item.href}
-                            role="menuitem"
-                            className={`${styles.dropdownLink} ${isActive ? styles.dropdownLinkActive : ""}`}
+                            className={`${styles.overlayLink} ${isActive ? styles.overlayLinkActive : ""}`}
                             onClick={(e) => handleNavClick(e, item.href)}
                             aria-current={isActive ? "page" : undefined}
                           >
-                            {item.label}
+                            <motion.span
+                              className={styles.overlayLinkText}
+                              whileHover={{ x: 6 }}
+                              whileTap={{ scale: 0.97, opacity: 0.85 }}
+                              transition={overlaySpring}
+                            >
+                              {item.label}
+                            </motion.span>
                             {isActive && (
                               <motion.span
-                                layoutId="dropdownActiveIndicator"
-                                className={styles.dropdownIndicator}
-                                transition={dropdownSpring}
+                                layoutId="mobileNavActiveIndicator"
+                                className={styles.overlayIndicator}
+                                transition={overlaySpring}
                                 aria-hidden
                               />
                             )}
@@ -179,11 +218,11 @@ export default function Navbar() {
                     })}
                   </motion.ul>
                 </motion.nav>
-              )}
-            </AnimatePresence>
-          </div>
-        </nav>
-      </Container>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
+        )}
     </motion.header>
   );
 }

@@ -186,19 +186,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: visible;
+  padding-block: clamp(1.5rem, 5vw, 2.5rem);
 }
 
 @media (min-width: 1024px) {
   .portraitColumn {
     justify-content: flex-end;
+    padding-block: 0;
   }
 }
 
 .portraitWrapper {
   position: relative;
   width: 100%;
-  max-width: min(380px, 88vw);
+  max-width: min(340px, 84vw);
   margin-inline: auto;
+  overflow: visible;
+}
+
+@media (min-width: 640px) {
+  .portraitWrapper {
+    max-width: min(380px, 88vw);
+  }
 }
 
 @media (min-width: 1024px) {
@@ -242,7 +252,7 @@
   position: relative;
   overflow: hidden;
   border-radius: calc(var(--radius-xl) - 8px);
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 912 / 1079;
 }
 
 .portraitImg {
@@ -302,95 +312,232 @@
 
 .floatingBadges {
   position: absolute;
-  inset: 0;
+  inset: -11% -7% -13% -7%;
   pointer-events: none;
   z-index: 5;
 }
 
-.floatingBadge {
-  position: absolute;
-  display: none;
+@media (min-width: 640px) {
+  .floatingBadges {
+    inset: -9% -6% -11% -6%;
+  }
 }
 
 @media (min-width: 1024px) {
-  .floatingBadge {
-    display: block;
+  .floatingBadges {
+    inset: 0;
   }
 }
 
+.floatingChip {
+  position: absolute;
+  pointer-events: auto;
+}
+
+/* Role badges — mobile-first placement around portrait */
 .badgeTopRight {
-  top: -2%;
-  right: -10%;
+  top: 2%;
+  right: 0;
 }
 
 .badgeMidLeft {
-  top: 36%;
-  left: -22%;
+  top: 34%;
+  left: -2%;
 }
 
 .badgeBottomLeft {
-  bottom: 10%;
-  left: -14%;
+  bottom: 14%;
+  left: 0;
 }
 
 .badgeBottomRight {
-  bottom: -2%;
-  right: -8%;
+  bottom: 0;
+  right: 2%;
 }
 
-.floatingBadgeInner {
+/* Tech chips — mobile placement */
+.techTopLeft {
+  top: 16%;
+  left: 4%;
+}
+
+.techMidRight {
+  top: 52%;
+  right: -2%;
+}
+
+.techBottomRight {
+  bottom: 4%;
+  right: 0;
+}
+
+@media (min-width: 640px) {
+  .badgeTopRight {
+    top: 0;
+    right: -4%;
+  }
+
+  .badgeMidLeft {
+    top: 36%;
+    left: -8%;
+  }
+
+  .badgeBottomLeft {
+    bottom: 12%;
+    left: -6%;
+  }
+
+  .techTopLeft {
+    top: 10%;
+    left: -2%;
+  }
+
+  .techMidRight {
+    top: 50%;
+    right: -6%;
+  }
+
+  .techBottomRight {
+    bottom: 0;
+    right: -4%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .badgeTopRight {
+    top: -2%;
+    right: -10%;
+  }
+
+  .badgeMidLeft {
+    top: 36%;
+    left: -22%;
+  }
+
+  .badgeBottomLeft {
+    bottom: 10%;
+    left: -14%;
+  }
+
+  .badgeBottomRight {
+    bottom: -2%;
+    right: -8%;
+  }
+
+  .techTopLeft {
+    top: 8%;
+    left: -18%;
+  }
+
+  .techMidRight {
+    top: 58%;
+    right: -14%;
+  }
+
+  .techBottomRight {
+    bottom: -8%;
+    right: -2%;
+  }
+}
+
+.chipInner {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-min);
+  padding: 0.45rem 0.75rem;
+  font-family: var(--font-sora), system-ui, sans-serif;
+  font-size: clamp(0.5625rem, 2.4vw, 0.625rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--navy);
+  border-radius: 999px;
+  border: 1px solid transparent;
+  box-shadow:
+    0 4px 18px rgba(13, 27, 61, 0.07),
+    0 1px 3px rgba(214, 198, 230, 0.35);
+  backdrop-filter: blur(14px);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.chipContent {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.45rem 0.8rem;
-  font-family: var(--font-sora), system-ui, sans-serif;
-  font-size: 0.625rem;
-  font-weight: 700;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--navy);
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid var(--glass-border);
-  border-radius: 999px;
-  box-shadow: var(--shadow-card);
-  backdrop-filter: blur(12px);
 }
 
-.techTags {
-  position: absolute;
-  bottom: -10%;
-  right: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  justify-content: flex-end;
-  max-width: 220px;
-}
-
-@media (max-width: 1023px) {
-  .techTags {
-    position: static;
-    margin-top: 1.25rem;
-    justify-content: center;
-    max-width: none;
-  }
-
-  .floatingBadges {
-    position: static;
+@media (min-width: 640px) {
+  .chipInner {
+    min-height: auto;
+    padding: 0.45rem 0.8rem;
+    font-size: 0.625rem;
   }
 }
 
-.techTag {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.35rem 0.65rem;
-  font-size: 0.65rem;
+.chipInner:focus-visible {
+  outline: 2px solid var(--lilac);
+  outline-offset: 3px;
+}
+
+.chipInner:hover {
+  box-shadow:
+    0 8px 28px rgba(13, 27, 61, 0.1),
+    0 2px 8px rgba(214, 198, 230, 0.45);
+}
+
+.chipRole {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(232, 223, 240, 0.78) 100%
+  );
+  border-color: rgba(214, 198, 230, 0.65);
+}
+
+.chipRole:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(232, 223, 240, 0.92) 100%
+  );
+  border-color: var(--lilac);
+}
+
+.chipTech {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(214, 198, 230, 0.75);
+  color: var(--navy-muted);
   font-weight: 600;
   letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.chipTech:hover {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: var(--lilac);
+  color: var(--navy);
+}
+
+.chipIcon {
+  flex-shrink: 0;
+  color: var(--lilac);
+}
+
+.chipTech .chipIcon {
   color: var(--navy-muted);
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid var(--lilac);
-  border-radius: 999px;
-  box-shadow: var(--shadow-card);
-  backdrop-filter: blur(10px);
+}
+
+.chipTech:hover .chipIcon {
+  color: var(--navy);
+}
+
+.chipLabel {
+  white-space: nowrap;
 }

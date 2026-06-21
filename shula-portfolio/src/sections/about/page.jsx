@@ -39,8 +39,10 @@ export default function About() {
               <Image
                 src={about.image}
                 alt={about.imageAlt}
-                width={600}
-                height={600}
+                width={912}
+                height={1093}
+                quality={90}
+                sizes="(max-width: 1024px) 420px, 480px"
                 className={styles.portraitImg}
               />
             </div>

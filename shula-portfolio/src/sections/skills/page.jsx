@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code2, Settings, Palette, Paintbrush } from "lucide-react";
+import { Briefcase, Code2, Network, Palette, Settings, Users } from "lucide-react";
 import { site } from "@/data/site";
 import Container from "@/components/layout/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -11,7 +11,9 @@ const iconMap = {
   code: Code2,
   settings: Settings,
   palette: Palette,
-  brush: Paintbrush,
+  network: Network,
+  briefcase: Briefcase,
+  users: Users,
 };
 
 export default function Skills() {
@@ -22,7 +24,7 @@ export default function Skills() {
       <Container>
         <SectionHeading title={skills.title} className="mb-6 sm:mb-12 lg:mb-16" />
 
-        <div className="grid w-full min-w-0 grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4 lg:gap-6">
+        <div className="grid w-full min-w-0 grid-cols-2 gap-3 sm:gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {skills.items.map((item, index) => {
             const Icon = iconMap[item.icon] || Code2;
 
